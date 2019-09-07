@@ -1,6 +1,8 @@
 package TheGame;
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -12,8 +14,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.FileInputStream;
+import java.sql.Time;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main extends Application {
 
@@ -101,6 +107,20 @@ public class Main extends Application {
                 gloom[0].setX(gloom[0].getX() - 10);
 
                 if (gloom[0].intersects(pikachu.getLayoutBounds())) {
+                    FadeTransition damageTaken = new FadeTransition(Duration.seconds(0.1), pikachu);
+                    damageTaken.setFromValue(1.0);
+                    damageTaken.setToValue(0.0);
+                    damageTaken.setCycleCount(Animation.INDEFINITE);
+                    damageTaken.play();
+                    new Timer().schedule(
+                            new TimerTask() {
+                                @Override
+                                public void run() {
+                                    pikachu.setOpacity(1.0);
+                                    damageTaken.stop();
+                                }
+                            }, 1000
+                    );
                     gloom[0].setY(100000);
                     canvas.getChildren().remove(gloom[0]);
                     healthBar.setWidth(healthBar.getWidth() - 50);
