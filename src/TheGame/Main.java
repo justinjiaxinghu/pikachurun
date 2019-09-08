@@ -1,5 +1,4 @@
 package TheGame;
-
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
@@ -15,9 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.FileInputStream;
-import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -119,7 +116,7 @@ public class Main extends Application {
                                     pikachu.setOpacity(1.0);
                                     damageTaken.stop();
                                 }
-                            }, 1000
+                            },  500
                     );
                     gloom[0].setY(100000);
                     canvas.getChildren().remove(gloom[0]);
